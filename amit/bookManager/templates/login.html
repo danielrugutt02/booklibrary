@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
+  {% load static %}
+  <link media = "screen" rel="stylesheet" href="{% static 'css\style.css' %}" alt="NO">
+</head>
+
+<body>
+
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="index.html">Rugutt Libary Manager</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="search.html">Search</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  </nav>
+  <!-- Tabs Titles -->
+
+
+  <br><br><br><br><br><br>
+  <div>
+    <!-- Login Form -->
+    <div class="card">
+      <div class="container">
+
+        <img style="margin-right: 60%; padding-top: 10px" src="C:\Users\Amit\Desktop\Intro to Python/logo.png" id="icon"
+          alt="User Icon" />
+      </div>
+      <br>
+      <form>
+        <input style="font-size: 30px" type="text" id="login" name="login" placeholder="login"> <br><br>
+        <input style="font-size: 30px" type="text" id="password" name="login" placeholder="password"><br><br>
+        <input class="btn btn-info" style="font-size: 30px" type="submit" value="Log In">
+      </form>
+
+      <div id="formFooter">
+        <a href="#">Forget Password?</a>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+
+</html>
