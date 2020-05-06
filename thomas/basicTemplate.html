@@ -43,7 +43,6 @@
         .searchTerm {
             width: 100%;
             border: 3px solid #00B4CC;
-            border-right: none;
             padding: 5px;
             height: 20px;
             border-radius: 5px 0 0 5px;
@@ -53,18 +52,6 @@
         
         .searchTerm:focus {
             color: black;
-        }
-        
-        .searchButton {
-            width: 80px;
-            height: 36px;
-            border: 1px solid #00B4CC;
-            background: #00B4CC;
-            text-align: center;
-            color: #fff;
-            border-radius: 0 5px 5px 0;
-            cursor: pointer;
-            font-size: 20px;
         }
         
         .wrap {
@@ -83,8 +70,7 @@
       </select> -->
     <div class="wrap">
         <div class="search">
-            <input type="text" class="searchTerm" id="userInput" placeholder="Search..." onclick="table(result)">
-            <button type="submit" class="searchButton" id="enter" onclick="search()">Search</button>
+            <input type="text" class="searchTerm" id="userInput" placeholder="Search..." onkeyup="liveSearch()">
         </div>
     </div>
     <p id="showData" style="padding: 1cm;"></p>
@@ -95,8 +81,11 @@
     enterKey.addEventListener("keyup", function(e) {
         e.preventDefault();
         if (e.keyCode == 13) {
+            //alert("enter was pressed");
             document.getElementById("enter").click();
-        }
+        } //else if (e.keyCode == 8) {
+        //     table(result);
+        // }
     });
     var dataJson;
     let result = [];
@@ -159,19 +148,27 @@
         div.appendChild(table);
     }
 
-    function search() {
+    // function search() { // can be used with a search button
+    //     var searchFor = document.getElementById("userInput").value;
+    //     var filtered = result.filter(function(n) {
+    //         return n.Title.toLowerCase().includes(searchFor.toLowerCase() + " "); // change .Name to desired key of the json
+    //         // need to fix this because + " ", isn't really that good of a search thing
+    //     });
+    //     if (filtered.length == 0) {
+    //         alert("No Search Results");
+    //         //table(result);
+    //     } else {
+    //         table(filtered);
+    //     }
+    //     //console.log(filtered);
+    // }
+
+    function liveSearch() {
         var searchFor = document.getElementById("userInput").value;
         var filtered = result.filter(function(n) {
-            return n.Title.toLowerCase().includes(searchFor.toLowerCase() + " "); // change .Name to desired key of the json
-            // need to fix this because + " ", isn't really that good of a search thing
+            return n.Title.toLowerCase().includes(searchFor.toLowerCase()); // change .Name to desired key of the json
         });
-        if (filtered.length == 0) {
-            alert("No Search Results");
-            //table(result);
-        } else {
-            table(filtered);
-        }
-        //console.log(filtered);
+        table(filtered);
     }
 </script>
 
