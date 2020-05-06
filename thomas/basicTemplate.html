@@ -14,6 +14,7 @@
         table,
         th,
         td {
+            background-color: rgba(255, 255, 255, 0.5);
             border: solid 1px #DDD;
             border-collapse: collapse;
             padding: 2px 3px;
@@ -26,7 +27,7 @@
     </style>
 </head>
 
-<body style="background-image: url('blue.jpg');">
+<body style="background-image: url('library.jpg');">
     <style>
         @import url(https://fonts.googleapis.com/css?family=Open+Sans);
         body {
@@ -54,6 +55,29 @@
             color: black;
         }
         
+        .selector {
+            width: 100px;
+            height: 36px;
+            border: 1px solid #00B4CC;
+            background: #00B4CC;
+            text-align: center;
+            color: #fff;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-size: 15px;
+        }
+        /* .searchButton {
+            width: 80px;
+            height: 36px;
+            border: 1px solid #00B4CC;
+            background: #00B4CC;
+            text-align: center;
+            color: #fff;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-size: 20px;
+        } */
+        
         .wrap {
             width: 30%;
             position: absolute;
@@ -62,7 +86,7 @@
             transform: translate(-50%, -50%);
         }
     </style>
-    <!-- <select id="selector">
+    <!-- <select id="selector" class="selector">
         <option value="Authors">Author</option> // make code later to get values from data set
         <option value="Title">Title</option>
         <option value="ISBN">ISBN</option>
@@ -70,7 +94,14 @@
       </select> -->
     <div class="wrap">
         <div class="search">
+            <select id="selector" class="selector">
+            <option value="Title">Title</option> // make code later to get values from data set
+            <option value="Authors">Author</option> 
+            <option value="ISBN">ISBN</option>
+            <option value="ISBN_10">ISBN 10</option>
+          </select>
             <input type="text" class="searchTerm" id="userInput" placeholder="Search..." onkeyup="liveSearch()">
+            <!-- <button type="submit" class="searchButton" id="enter">Submit</button> -->
         </div>
     </div>
     <p id="showData" style="padding: 1cm;"></p>
@@ -115,7 +146,8 @@
         return JSON.stringify(result);
     }
 
-    function table(data) {
+
+    function table(data) { // creates data based on the data given
         var col = [];
         for (var i = 0; i < data.length; i++) {
             for (var key in data[i]) {
@@ -163,12 +195,28 @@
     //     //console.log(filtered);
     // }
 
-    function liveSearch() {
+    function liveSearch() { // will filter the table everytime a key is pressed
         var searchFor = document.getElementById("userInput").value;
+        console.log(searchFor);
+        var selected = document.getElementById("selector").value;
+        console.log(selected);
         var filtered = result.filter(function(n) {
-            return n.Title.toLowerCase().includes(searchFor.toLowerCase()); // change .Name to desired key of the json
+            if (selected == "Authors") {
+                return n.Authors.toLowerCase().includes(searchFor.toLowerCase());
+            } else if (selected == "ISBN") { // make the numbers so they must be typed in order
+                return n.ISBN.toLowerCase().includes(searchFor.toLowerCase());
+            } else if (selected == "ISBN_10") { // make the numbers so they must be typed in order
+                return n.ISBN_10.toLowerCase().includes(searchFor.toLowerCase());
+            } else {
+                return n.Title.toLowerCase().includes(searchFor.toLowerCase());
+            }
         });
-        table(filtered);
+        if (filtered.length == 0) {
+            alert("We Currently Do Not Have the Book You are Looking For");
+            table(result);
+        } else {
+            table(filtered);
+        }
     }
 </script>
 
