@@ -77,16 +77,16 @@
 </body>
 
 <script>
-    var enterKey = document.getElementById("userInput");
-    enterKey.addEventListener("keyup", function(e) {
-        e.preventDefault();
-        if (e.keyCode == 13) {
-            //alert("enter was pressed");
-            document.getElementById("enter").click();
-        } //else if (e.keyCode == 8) {
-        //     table(result);
-        // }
-    });
+    // var enterKey = document.getElementById("userInput");
+    // enterKey.addEventListener("keyup", function(e) {
+    //     e.preventDefault();
+    //     if (e.keyCode == 13) {
+    //         //alert("enter was pressed");
+    //         document.getElementById("enter").click();
+    //     } //else if (e.keyCode == 8) {
+    //     //     table(result);
+    //     // }
+    // });
     var dataJson;
     let result = [];
     main();
@@ -148,7 +148,7 @@
         div.appendChild(table);
     }
 
-    // function search() { // can be used with a search button
+    // function search() { // can be used with a search
     //     var searchFor = document.getElementById("userInput").value;
     //     var filtered = result.filter(function(n) {
     //         return n.Title.toLowerCase().includes(searchFor.toLowerCase() + " "); // change .Name to desired key of the json
