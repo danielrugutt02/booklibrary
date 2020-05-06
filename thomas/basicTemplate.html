@@ -83,7 +83,7 @@
       </select> -->
     <div class="wrap">
         <div class="search">
-            <input type="text" class="searchTerm" id="userInput" placeholder="Search...">
+            <input type="text" class="searchTerm" id="userInput" placeholder="Search..." onclick="table(result)">
             <button type="submit" class="searchButton" id="enter" onclick="search()">Search
           </button>
         </div>
@@ -92,15 +92,14 @@
 </body>
 
 <script>
-    var x = document.getElementById("enter");
-    x.addEventListener("keyup", function(event) {
-        if (event.keyCode === 13) {
-            search();
+    var enterKey = document.getElementById("enter");
+    enterKey.addEventListener("keyup", function(e) {
+        if (e.keyCode === 13) {
+            document.getElementById("enter").click();
         }
     });
     var dataJson;
     let result = [];
-    var key;
     main();
 
     async function main() {
@@ -113,11 +112,11 @@
         const response = await fetch("test2.tsv"); // insert desired file 
         const data = await response.text();
         var lines = data.split("\n");
-        var headers = lines[0].split("\t"); // will make into ~ for final result
+        var headers = lines[0].split("\t"); // split by delimiter
 
         for (var i = 1; i < lines.length; i++) {
             var obj = {};
-            var currline = lines[i].split("\t"); // will make into ~ for final result
+            var currline = lines[i].split("\t"); // split by delimiter
 
             for (var k = 0; k < headers.length; k++) {
                 obj[headers[k]] = currline[k];
@@ -163,9 +162,14 @@
     function search() {
         var searchFor = document.getElementById("userInput").value;
         var filtered = result.filter(function(n) {
-            return n.Title.toLowerCase().includes(searchFor.toLowerCase()); // change .Name to desired key of the json
+            return n.Title.toLowerCase().includes(searchFor.toLowerCase() + " "); // change .Name to desired key of the json
         });
-        table(filtered);
+        if (filtered.length == 0) {
+            alert("No Search Results");
+            //table(result);
+        } else {
+            table(filtered);
+        }
         //console.log(filtered);
     }
 </script>
